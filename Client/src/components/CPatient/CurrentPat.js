@@ -10,7 +10,7 @@ const CurrentPat = () => {
   const [currentPatient, setCurrentPatient] = useState(null);
   const [salineWeight, setSalineWeight] = useState(0);
   const [notification, setNotification] = useState(null);
-  const WEIGHT_DECREASE_LIMIT = 100.0;
+  const WEIGHT_NOTIFICATION_LIMIT = 55.0;
   const LOW_WEIGHT_LIMIT = 10.0;
 
   useEffect(() => {
@@ -45,8 +45,10 @@ const CurrentPat = () => {
 
     if (newWeight < LOW_WEIGHT_LIMIT) {
       setNotification('Weight is critically low!');
-    } else if (newWeight < WEIGHT_DECREASE_LIMIT) {
+    } else if (newWeight < WEIGHT_NOTIFICATION_LIMIT) {
       setNotification('Weight is low, please check the saline bottle.');
+    } else {
+      setNotification(null); // Clear notification if the weight is above the limit
     }
   };
 
